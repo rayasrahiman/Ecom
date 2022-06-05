@@ -2,6 +2,7 @@ import {View, Text, Image, StyleSheet, ScrollView} from 'react-native';
 import React from 'react';
 
 import {Colors} from '../constants/colors';
+import {RESTAURANTS} from '../data/dummy-data'
 
 export default function Choices() {
   return (
@@ -9,12 +10,12 @@ export default function Choices() {
       <View style={styles.container}>
         <View style={styles.imageContainer}>
           <Image
-            source={require('../assets/food1.png')}
+            source={RESTAURANTS[0].image}
             resizeMode="cover"
             style={styles.image}
           />
           <View style={styles.imagetextContainer}>
-            <Text>Aroma Restaurant</Text>
+            <Text style={{fontWeight: "bold", fontSize: 25, color: "red"}}>{RESTAURANTS[0].restaurant}</Text>
           </View>
           <View style={styles.imageSliceContainer} />
         </View>
