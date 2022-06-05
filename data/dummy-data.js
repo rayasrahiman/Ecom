@@ -8,6 +8,7 @@ export const RESTAURANTS = [
     discount: 50,
     rating: 5,
     timing: '60-80 min',
+    miles: 2.3,
     image: require('../assets/restaurant1.png'),
   },
   {
@@ -19,6 +20,7 @@ export const RESTAURANTS = [
     discount: 60,
     rating: 4.2,
     timing: '60-80 min',
+    miles: 2.3,
     image: require('../assets/restaurant2.png'),
   },
   {
@@ -30,6 +32,7 @@ export const RESTAURANTS = [
     discount: 40,
     rating: 3.5,
     timing: '60-80 min',
+    miles: 2.3,
     image: require('../assets/restaurant3.png'),
   },
   {
@@ -41,6 +44,7 @@ export const RESTAURANTS = [
     discount: 30,
     rating: 2,
     timing: '60-80 min',
+    miles: 2.3,
     image: require('../assets/restaurant4.png'),
   },
   {
@@ -52,6 +56,7 @@ export const RESTAURANTS = [
     discount: 75,
     rating: 4,
     timing: '60-80 min',
+    miles: 2.3,
     image: require('../assets/restaurant5.png'),
   },
   {
@@ -63,6 +68,7 @@ export const RESTAURANTS = [
     discount: 25,
     rating: 3.3,
     timing: '60-80 min',
+    miles: 2.3,
     image: require('../assets/restaurant6.png'),
   },
   {
@@ -74,6 +80,7 @@ export const RESTAURANTS = [
     discount: 20,
     rating: 4.8,
     timing: '60-80 min',
+    miles: 2.3,
     image: require('../assets/restaurant7.png'),
   },
 ];
@@ -82,8 +89,7 @@ export const FOODS = [
   {
     id: 1,
     name: 'Sagittis egestas',
-    subDescription:
-      'Excepteur sint occaecat cupidatat non proident.',
+    subDescription: 'Excepteur sint occaecat cupidatat non proident.',
     description:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
     amount: 23,
@@ -92,8 +98,7 @@ export const FOODS = [
   {
     id: 2,
     name: 'Sagittis egestas',
-    subDescription:
-      'Excepteur sint occaecat cupidatat non proident.',
+    subDescription: 'Excepteur sint occaecat cupidatat non proident.',
     description:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
     amount: 23,
@@ -102,8 +107,7 @@ export const FOODS = [
   {
     id: 3,
     name: 'Sagittis egestas',
-    subDescription:
-      'Excepteur sint occaecat cupidatat non proident.',
+    subDescription: 'Excepteur sint occaecat cupidatat non proident.',
     description:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
     amount: 23,
@@ -112,8 +116,7 @@ export const FOODS = [
   {
     id: 4,
     name: 'Sagittis egestas',
-    subDescription:
-      'Excepteur sint occaecat cupidatat non proident.',
+    subDescription: 'Excepteur sint occaecat cupidatat non proident.',
     description:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
     amount: 23,
@@ -122,8 +125,7 @@ export const FOODS = [
   {
     id: 5,
     name: 'Sagittis egestas',
-    subDescription:
-      'Excepteur sint occaecat cupidatat non proident.',
+    subDescription: 'Excepteur sint occaecat cupidatat non proident.',
     description:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
     amount: 23,
@@ -132,8 +134,7 @@ export const FOODS = [
   {
     id: 6,
     name: 'Sagittis egestas',
-    subDescription:
-      'Excepteur sint occaecat cupidatat non proident.',
+    subDescription: 'Excepteur sint occaecat cupidatat non proident.',
     description:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
     amount: 23,

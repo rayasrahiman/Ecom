@@ -1,30 +1,97 @@
-import {View, Text, Image, StyleSheet, ScrollView} from 'react-native';
-import React from 'react';
+import {
+  View,
+  Text,
+  Image,
+  StyleSheet,
+  ScrollView,
+  TouchableOpacity,
+  FlatList,
+} from 'react-native';
+import React, {useLayoutEffect, useState} from 'react';
+import Ionicons from 'react-native-vector-icons/dist/Ionicons';
 
 import {Colors} from '../constants/colors';
-import {RESTAURANTS} from '../data/dummy-data'
+import {RESTAURANTS, ADDONS, ADDONSFAM, ADDONSSUB} from '../data/dummy-data';
 
-export default function Choices() {
+export default function Choices({navigation, route}) {
+  const [foodData, setFoodData] = useState({});
+
+  useLayoutEffect(() => {
+    const data = route.params.data;
+    setFoodData(data);
+  }, [foodData]);
+
   return (
     <ScrollView>
       <View style={styles.container}>
         <View style={styles.imageContainer}>
           <Image
-            source={RESTAURANTS[0].image}
+            source={foodData.image}
             resizeMode="cover"
             style={styles.image}
           />
-          <View style={styles.imagetextContainer}>
-            <Text style={{fontWeight: "bold", fontSize: 25, color: "red"}}>{RESTAURANTS[0].restaurant}</Text>
+          {/* <View style={styles.imagetextContainer}> */}
+          <View
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              marginHorizontal: 20,
+              top: '-70%',
+            }}>
+            <TouchableOpacity onPress={() => navigation.goBack()}>
+              <Ionicons
+                name="arrow-back"
+                size={30}
+                color={Colors.mainBackground}
+              />
+            </TouchableOpacity>
+            <Text
+              style={{
+                fontWeight: 'bold',
+                fontSize: 25,
+                color: Colors.mainBackground,
+              }}>
+              {foodData.name}
+            </Text>
+            <View
+              style={{flexDirection: 'row', justifyContent: 'space-evenly'}}>
+              <TouchableOpacity onPress={() => {}}>
+                <Ionicons
+                  name="search-outline"
+                  size={30}
+                  color={Colors.mainBackground}
+                />
+              </TouchableOpacity>
+              <TouchableOpacity onPress={() => {}}>
+                <Ionicons
+                  name="bookmark-outline"
+                  size={30}
+                  color={Colors.mainBackground}
+                />
+              </TouchableOpacity>
+              <TouchableOpacity onPress={() => {}}>
+                <Ionicons
+                  name="share-outline"
+                  size={30}
+                  color={Colors.mainBackground}
+                />
+              </TouchableOpacity>
+            </View>
           </View>
+          {/* </View> */}
           <View style={styles.imageSliceContainer} />
         </View>
         <View style={[styles.cardContainer, styles.top]}>
-          <Text>QR 23</Text>
-          <Text>Sagittis egestas</Text>
-          <Text>
-            Non porta vestibulum feugiat ac pretium neque vestibulum feugiat ac
-            pretium. Non porta vestium feugiat acendo...
+          <Text style={{color: Colors.primaryGreen500, fontSize: 25}}>
+            QR {foodData.amount}
+          </Text>
+          <Text style={{color: Colors.primaryBlack500, fontSize: 25}}>
+            {foodData.name}
+          </Text>
+          <Text
+            numberOfLines={2}
+            style={{color: Colors.primaryGreen150, fontSize: 16}}>
+            {foodData.description}
           </Text>
         </View>
         <View style={styles.warningContainer}>
@@ -33,34 +100,148 @@ export default function Choices() {
             pulvinar.
           </Text>
         </View>
-        <View style={styles.cardContainer}>
-          <Text>Choice of (1 minimum)</Text>
-          <View style={styles.extraContainer}>
-            <Text>QR 2</Text>
-            <Text style={{}}>Extra Cheese</Text>
-          </View>
+        <View
+          style={{
+            backgroundColor: Colors.mainBackground,
+            padding: 20,
+            marginBottom: -5,
+          }}>
+          <Text
+            style={{
+              fontWeight: 'bold',
+              fontSize: 20,
+              color: Colors.primaryBlack500,
+            }}>
+            Choice of (1 minimum)
+          </Text>
         </View>
-        <View style={styles.cardContainer}>
-          <Text>Choice of (1 minimum)</Text>
-          <View style={styles.extraContainer}>
-            <Text>QR 2</Text>
-            <Text style={{}}>Extra Cheese</Text>
-          </View>
+        <FlatList
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          data={ADDONS}
+          keyExtractor={(item, index) => item.id}
+          renderItem={({item}) => {
+            return (
+              <View style={styles.cardContainer}>
+                <View style={styles.extraContainer}>
+                  <Text>{item.amount}</Text>
+                  <Text style={{}}>{item.name}</Text>
+                </View>
+              </View>
+            );
+          }}
+        />
+        <View
+          style={{
+            backgroundColor: Colors.mainBackground,
+            padding: 20,
+            marginBottom: -5,
+          }}>
+          <Text
+            style={{
+              fontWeight: 'bold',
+              fontSize: 20,
+              color: Colors.primaryBlack500,
+            }}>
+            Choice of family substitute
+          </Text>
         </View>
+        <FlatList
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          data={ADDONSFAM}
+          keyExtractor={(item, index) => item.id}
+          renderItem={({item}) => {
+            return (
+              <View style={styles.cardContainer}>
+                <View style={styles.extraContainer}>
+                  <Text>{item.amount}</Text>
+                  <Text style={{}}>{item.name}</Text>
+                </View>
+              </View>
+            );
+          }}
+        />
+        <View
+          style={{
+            backgroundColor: Colors.mainBackground,
+            padding: 20,
+            marginBottom: -5,
+          }}>
+          <Text
+            style={{
+              fontWeight: 'bold',
+              fontSize: 20,
+              color: Colors.primaryBlack500,
+            }}>
+            Choice of coleslow substitute
+          </Text>
+        </View>
+        <FlatList
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          data={ADDONSSUB}
+          keyExtractor={(item, index) => item.id}
+          renderItem={({item}) => {
+            return (
+              <View style={styles.cardContainer}>
+                <View style={styles.extraContainer}>
+                  <Text>{item.amount}</Text>
+                  <Text style={{}}>{item.name}</Text>
+                </View>
+              </View>
+            );
+          }}
+        />
         <View style={styles.cardContainer}>
-          <Text>Add Comments</Text>
+          <Text
+            style={{
+              fontWeight: 'bold',
+              fontSize: 20,
+              color: Colors.primaryBlack500,
+            }}>
+            Add Comments
+          </Text>
           <View>
-            <Text>Quam egestas et, consectetur aliquam</Text>
+            <Text
+              style={{
+                fontSize: 16,
+                color: Colors.primaryGrey200,
+              }}>
+              Quam egestas et, consectetur aliquam
+            </Text>
           </View>
-          <View style={styles.buttonContainer}>
-            <Text>2</Text>
+          <View
+            style={[
+              styles.buttonContainer,
+              {flexDirection: 'row', justifyContent: 'space-between'},
+            ]}>
+            <Ionicons name="trash-bin-outline" size={18} color="red" />
+            <Text
+              style={{
+                fontSize: 16,
+                color: Colors.primaryPurple500,
+              }}>
+              2
+            </Text>
+            <Ionicons
+              name="add-outline"
+              size={18}
+              color={Colors.primaryPurple500}
+            />
           </View>
           <View
             style={[
               styles.buttonContainer,
               {backgroundColor: Colors.primaryPurple500},
             ]}>
-            <Text>Add to basket (QR 25)</Text>
+            <Text
+              style={{
+                fontSize: 16,
+                color: Colors.mainBackground,
+              }}>
+              Add to basket (QR 25)
+            </Text>
           </View>
         </View>
       </View>

@@ -4,113 +4,168 @@ import {
   ScrollView,
   StyleSheet,
   Image,
+  ImageBackground,
   FlatList,
+  TouchableOpacity,
 } from 'react-native';
-import React from 'react';
+import React, {useLayoutEffect, useState} from 'react';
+import Ionicons from 'react-native-vector-icons/dist/Ionicons';
+import IconMaterial from 'react-native-vector-icons/dist/MaterialCommunityIcons';
 
 import {Colors} from '../constants/colors';
 import {RESTAURANTS, FOODS, FOODTABS} from '../data/dummy-data';
 import FoodList from '../components/FoodList';
+import FoodCard from '../components/FoodCard';
 
-export default function RestaurantDetails({navigation}) {
-  console.error = (error) => error.apply;
+export default function RestaurantDetails({navigation, route}) {
+  const [restaurantData, setRestaurantData] = useState({});
+  console.error = error => error.apply;
+
+  useLayoutEffect(() => {
+    const data = route.params.data;
+    setRestaurantData(data);
+    // console.log(restaurantData, "DATA HERE")
+  }, [restaurantData]);
+
   return (
     <ScrollView>
       <View style={styles.container}>
         <View style={styles.imageContainer}>
-          <Image
-            source={RESTAURANTS[0].image}
+          <ImageBackground
+            source={restaurantData.image}
             resizeMode="cover"
-            style={styles.image}
-          />
-          {/* <View style={styles.imagetextContainer}>
-            <Text style={{fontWeight: "bold", fontSize: 25, color: "red"}}>{RESTAURANTS[0].restaurant}</Text>
-          </View> */}
+            style={styles.image}>
+            <View
+              style={{
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+                marginHorizontal: 20,
+                marginTop: 20,
+              }}>
+              <TouchableOpacity onPress={() => navigation.goBack()}>
+                <Ionicons
+                  name="arrow-back"
+                  size={30}
+                  color={Colors.mainBackground}
+                />
+              </TouchableOpacity>
+              <View
+                style={{flexDirection: 'row', justifyContent: 'space-evenly'}}>
+                <TouchableOpacity onPress={() => {}}>
+                  <Ionicons
+                    name="search-outline"
+                    size={30}
+                    color={Colors.mainBackground}
+                  />
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => {}}>
+                  <Ionicons
+                    name="bookmark-outline"
+                    size={30}
+                    color={Colors.mainBackground}
+                  />
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => {}}>
+                  <Ionicons
+                    name="share-outline"
+                    size={30}
+                    color={Colors.mainBackground}
+                  />
+                </TouchableOpacity>
+              </View>
+            </View>
+          </ImageBackground>
           <View style={styles.imageSliceContainer} />
         </View>
         <View style={[styles.cardContainer, styles.top]}>
-          <Text>{RESTAURANTS[0].restaurant}</Text>
-          <Text>{RESTAURANTS[0].subDescription}</Text>
-          <View style={{flexDirection: 'row', justifyContent: 'space-evenly'}}>
-            <Text>{RESTAURANTS[0].rating}</Text>
-            <View style={{borderWidth: 1, borderColor: 'black', height: 15}} />
-            <Text>{RESTAURANTS[0].timing}</Text>
-            <View style={{borderWidth: 1, borderColor: 'black', height: 15}} />
+          <Text
+            style={{
+              fontWeight: 'bold',
+              fontSize: 30,
+              color: Colors.primaryBlack500,
+            }}>
+            {restaurantData.restaurant}
+          </Text>
+          <Text style={{fontSize: 16, color: Colors.primaryGrey200}}>
+            {restaurantData.subDescription}
+          </Text>
+          <View
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+            }}>
+            <View style={{flexDirection: 'column', alignItems: 'center'}}>
+              <View
+                style={{
+                  flexDirection: 'row',
+                  padding: 5,
+                  width: 100,
+                  borderRadius: 10,
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  backgroundColor: Colors.mainBackground,
+                }}>
+                <Ionicons
+                  style={{paddingRight: 5}}
+                  name="star-outline"
+                  size={18}
+                  color={Colors.primaryGreen500}
+                />
+                <Text style={{color: Colors.primaryGreen500, fontSize: 14}}>
+                  {restaurantData.rating}
+                </Text>
+              </View>
+              <Text style={{color: Colors.primaryGrey200, fontSize: 14}}>
+                Rating
+              </Text>
+            </View>
             <View
               style={{
+                borderLeftWidth: 1,
+                borderLeftColor: Colors.primaryGrey200,
+                height: 15,
+              }}
+            />
+            <View style={{flexDirection: 'column', alignItems: 'center'}}>
+              <Text style={{color: Colors.primaryGreen500, fontSize: 14}}>
+                {restaurantData.timing}
+              </Text>
+              <Text style={{color: Colors.primaryGrey200, fontSize: 14}}>
+                Time
+              </Text>
+            </View>
+            <View
+              style={{
+                borderLeftWidth: 1,
+                borderLeftColor: Colors.primaryGrey200,
+                height: 15,
+              }}
+            />
+            <View
+              style={{
+                flexDirection: 'row',
                 borderWidth: 1,
                 borderColor: Colors.primaryGreen500,
                 padding: 8,
                 borderRadius: 6,
+                width: 80,
+                justifyContent: 'center',
+                alignItems: 'center',
               }}>
-              <Text>Info</Text>
+              <Ionicons
+                style={{paddingRight: 5}}
+                name="information-circle-outline"
+                size={16}
+                color={Colors.primaryGreen500}
+              />
+              <Text style={{color: Colors.primaryGreen500, fontSize: 14}}>
+                Info
+              </Text>
             </View>
           </View>
         </View>
-        {/* <View style={styles.warningContainer}>
-          <Text>
-            Fermentum est massa dolor vulputate pellentesque velit facilisis
-            pulvinar.
-          </Text>
-        </View> */}
-        <View style={styles.cardContainer}>
-          <Text>Order Again?</Text>
-          <View
-            style={{
-              backgroundColor: Colors.primaryWhite500,
-              padding: 5,
-              borderRadius: 15,
-              overflow: 'hidden',
-            }}>
-            <View style={{flexDirection: 'row'}}>
-              <View style={{height: 100, width: 100}}>
-                <Image
-                  source={FOODS[0].image}
-                  style={{height: '100%', width: '100%'}}
-                  resizeMode="contain"
-                />
-              </View>
-              <View>
-                <View
-                  style={{
-                    flexDirection: 'row',
-                    justifyContent: 'space-around',
-                    marginLeft: '-10%',
-                  }}>
-                  <Text>{FOODS[0].name}</Text>
-                  <Text style={{paddingRight: 20}}> QR {FOODS[0].amount}</Text>
-                </View>
-                <View>
-                  <Text
-                    numberOfLines={2}
-                    style={{
-                      textAlign: 'left',
-                      marginRight: '20%',
-                      paddingLeft: 10,
-                    }}>
-                    {FOODS[0].subDescription}
-                  </Text>
-                </View>
-                <View style={{alignItems: 'flex-end', marginRight: '20%'}}>
-                  <View
-                    style={{
-                      flexDirection: 'row',
-                      height: 40,
-                      width: 100,
-                      justifyContent: 'center',
-                      alignItems: 'center',
-                      backgroundColor: Colors.primaryPurple500,
-                      padding: 10,
-                      borderRadius: 10,
-                    }}>
-                    <Text style={{color: 'white', paddingRight: 5}}>+</Text>
-                    <Text style={{color: 'white'}}>Add</Text>
-                  </View>
-                </View>
-              </View>
-            </View>
-          </View>
-        </View>
+        <FoodCard/>       
         <View style={styles.cardContainer}>
           <FlatList
             showsHorizontalScrollIndicator={false}
@@ -135,12 +190,10 @@ export default function RestaurantDetails({navigation}) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // backgroundColor: Colors.mainBackground,
   },
   imageContainer: {
     height: 300,
     backgroundColor: Colors.mainBackground,
-    // marginTop: -30,
   },
   image: {
     height: '100%',
