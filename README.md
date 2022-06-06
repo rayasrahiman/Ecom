@@ -1,6 +1,6 @@
 # Ecom APP
 ## Steps:
-[git clone](https://github.com/rayasrahiman/Ecom.git)
+git clone [git](https://github.com/rayasrahiman/Ecom.git)
 
 
 # NOTE:
