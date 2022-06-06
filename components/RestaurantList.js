@@ -17,9 +17,9 @@ import {Colors} from '../constants/colors';
 export default function RestaurantList() {
   const navigation = useNavigation();
   return (
-    <View style={{flex: 1}}>
-      <View style={{backgroundColor: Colors.mainBackground, padding: 20, marginBottom:-5}}>
-        <Text style={{fontWeight:"bold", fontSize: 20, color:Colors.primaryBlack500}}>All Restaurants</Text>
+    <View style={styles.container}>
+      <View style={styles.topContainer}>
+        <Text style={styles.topText}>All Restaurants</Text>
       </View>
       <FlatList
         showsVerticalScrollIndicator={false}
@@ -33,106 +33,44 @@ export default function RestaurantList() {
                   data: item,
                 })
               }
-              style={{
-                overflow: 'hidden',
-                margin: 5,
-                height: 300,
-                padding: 5,
-                backgroundColor: Colors.mainBackground,
-              }}>
-              <View style={{marginVertical: 10, padding: 5}}>
-                <Text style={{fontSize: 18, color: Colors.primaryBlack500}}>
-                  {item.restaurant}
-                </Text>
-                <Text style={{fontSize: 18, color: Colors.primaryGrey200}}>
-                  {item.subDescription}
-                </Text>
+              style={styles.mainContainer}>
+              <View style={styles.restaurantMainCont}>
+                <Text style={styles.restaurantName}>{item.restaurant}</Text>
+                <Text style={styles.subDesc}>{item.subDescription}</Text>
               </View>
-              <ImageBackground
-                source={item.image}
-                style={{
-                  // padding: 5,
-                  borderRadius: 15,
-                  overflow: 'hidden',
-                  height: '100%',
-                  width: '100%',
-                  //   alignItems: 'center',
-                }}>
-                <View
-                  style={{flexDirection: 'row', justifyContent: 'flex-start'}}>
-                  <View
-                    style={{
-                      backgroundColor: Colors.mainBackground,
-                      height: 40,
-                      width: 40,
-                      borderRadius: 40 / 2,
-                      justifyContent: 'center',
-                      alignItems: 'center',
-                      marginLeft: 10,
-                      marginRight: '15%',
-                    }}>
+              <ImageBackground source={item.image} style={styles.imageBackg}>
+                <View style={styles.bookMarkMainCont}>
+                  <View style={styles.bookMarkContainer}>
                     <Ionicons
                       name="bookmark-outline"
                       size={20}
                       color={Colors.primaryGreen300}
                     />
                   </View>
-                  <View
-                    style={{
-                      backgroundColor: Colors.primaryGreen200,
-                      padding: 5,
-                      height: 30,
-                      width: 150,
-                      alignItems: 'center',
-                      borderBottomLeftRadius: 25,
-                      borderBottomRightRadius: 25,
-                    }}>
-                    <Text style={{color: Colors.mainBackground}}>
+                  <View style={styles.discMainCont}>
+                    <Text style={styles.discText}>
                       {item.discount}% Discount
                     </Text>
                   </View>
                 </View>
-                <View
-                  style={{
-                    justifyContent: 'flex-end',
-                    alignItems: 'flex-start',
-                    marginTop: '30%',
-                    marginLeft: 10,
-                  }}>
-                  <View
-                    style={{
-                      flexDirection: 'row',
-                      padding: 5,
-                      borderRadius: 10,
-                      backgroundColor: Colors.primaryGreen500,
-                    }}>
+                <View style={styles.bottomMainCont}>
+                  <View style={styles.ratingMainContainer}>
                     <Ionicons
-                      style={{paddingRight: 5}}
+                      style={styles.ratingIcon}
                       name="star-outline"
                       size={18}
                       color={Colors.mainBackground}
                     />
-                    <Text style={{color: Colors.mainBackground}}>
-                      {item.rating}
-                    </Text>
+                    <Text style={styles.ratingText}>{item.rating}</Text>
                   </View>
-                  <View style={{flexDirection: 'row', padding: 5}}>
-                    <Text
-                      style={{paddingRight: 10, color: Colors.mainBackground}}>
-                      {item.timing}
-                    </Text>
+                  <View style={styles.timingContainer}>
+                    <Text style={styles.timingText}>{item.timing}</Text>
                     <Ionicons
                       name="timer-outline"
                       size={18}
                       color={Colors.mainBackground}
                     />
-                    <Text
-                      style={{
-                        paddingHorizontal: 10,
-                        color: Colors.mainBackground,
-                      }}>
-                      {item.miles}
-                    </Text>
+                    <Text style={styles.milesText}>{item.miles}</Text>
 
                     <IconMaterial
                       name="bike"
@@ -149,3 +87,104 @@ export default function RestaurantList() {
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  topContainer: {
+    backgroundColor: Colors.mainBackground,
+    padding: 20,
+    marginBottom: -5,
+  },
+  topText: {
+    fontWeight: 'bold',
+    fontSize: 20,
+    color: Colors.primaryBlack500,
+  },
+  mainContainer: {
+    overflow: 'hidden',
+    margin: 5,
+    height: 300,
+    padding: 5,
+    backgroundColor: Colors.mainBackground,
+  },
+  restaurantMainCont: {
+    marginVertical: 10,
+    padding: 5,
+  },
+  restaurantName: {
+    fontSize: 18,
+    color: Colors.primaryBlack500,
+  },
+  subDesc: {
+    fontSize: 18,
+    color: Colors.primaryGrey200,
+  },
+  imageBackg: {
+    borderRadius: 15,
+    overflow: 'hidden',
+    height: '100%',
+    width: '100%',
+  },
+  bookMarkMainCont: {
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+  },
+  bookMarkContainer: {
+    backgroundColor: Colors.mainBackground,
+    height: 40,
+    width: 40,
+    borderRadius: 40 / 2,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginLeft: 10,
+    marginRight: '15%',
+  },
+  discMainCont: {
+    backgroundColor: Colors.primaryGreen200,
+    padding: 5,
+    height: 30,
+    width: 150,
+    alignItems: 'center',
+    borderBottomLeftRadius: 25,
+    borderBottomRightRadius: 25,
+  },
+  discText: {
+    color: Colors.mainBackground,
+    fontSize: 14,
+  },
+  bottomMainCont: {
+    justifyContent: 'flex-end',
+    alignItems: 'flex-start',
+    marginTop: '30%',
+    marginLeft: 10,
+  },
+  ratingMainContainer: {
+    flexDirection: 'row',
+    padding: 5,
+    borderRadius: 10,
+    backgroundColor: Colors.primaryGreen500,
+  },
+  ratingIcon: {
+    paddingRight: 5,
+  },
+  ratingText: {
+    color: Colors.mainBackground,
+    fontSize: 16,
+  },
+  timingContainer: {
+    flexDirection: 'row',
+    padding: 5,
+  },
+  timingText: {
+    paddingRight: 10,
+    color: Colors.mainBackground,
+    fontSize: 16,
+  },
+  milesText: {
+    paddingHorizontal: 10,
+    color: Colors.mainBackground,
+    fontSize: 16,
+  },
+});

@@ -1,4 +1,11 @@
-import {View, Text, FlatList, TouchableOpacity, StyleSheet, ScrollView} from 'react-native';
+import {
+  View,
+  Text,
+  FlatList,
+  TouchableOpacity,
+  StyleSheet,
+  ScrollView,
+} from 'react-native';
 import React from 'react';
 import IconIonicons from 'react-native-vector-icons/dist/Ionicons';
 
@@ -9,17 +16,17 @@ import RestaurantList from '../components/RestaurantList';
 import Restaurant from '../components/Restaurant';
 
 export default function Product({navigation}) {
-  console.error = (error) => error.apply;
-  
+  console.error = error => error.apply;
+
   return (
     <ScrollView style={styles.container}>
       <View style={styles.cardContainer}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
-        <IconIonicons
-          name="arrow-back"
-          size={25}
-          color={Colors.mainBackground}
-        />
+          <IconIonicons
+            name="arrow-back"
+            size={25}
+            color={Colors.mainBackground}
+          />
         </TouchableOpacity>
         <FlatList
           horizontal
@@ -28,11 +35,10 @@ export default function Product({navigation}) {
           keyExtractor={(item, index) => item.id}
           renderItem={({item}) => {
             return (
-              <View
-                style={{justifyContent: 'flex-end', alignItems: 'flex-end'}}>
+              <View style={styles.mainTabContainer}>
                 <View>
                   <TouchableOpacity style={styles.tabButtonContainer}>
-                    <Text>{item.name}</Text>
+                    <Text style={styles.tabText}>{item.name}</Text>
                   </TouchableOpacity>
                 </View>
               </View>
@@ -41,16 +47,16 @@ export default function Product({navigation}) {
         />
       </View>
       <TopTabbar />
-      <View style={{backgroundColor: Colors.mainBackground, padding: 20, marginBottom:-5}}>
-        <Text style={{fontWeight:"bold", fontSize: 20, color:Colors.primaryBlack500}}>Newly Added</Text>
+      <View style={styles.mainTopCont}>
+        <Text style={styles.mainTopText}>Newly Added</Text>
       </View>
       <Restaurant inverted={true} />
-      <View style={{backgroundColor: Colors.mainBackground, padding: 20, marginBottom:-5}}>
-        <Text style={{fontWeight:"bold", fontSize: 20, color:Colors.primaryBlack500}}>Nearby</Text>
+      <View style={styles.mainTopCont}>
+        <Text style={styles.mainTopText}>Nearby</Text>
       </View>
       <Restaurant inverted={false} />
-      <View style={{backgroundColor: Colors.mainBackground, padding: 20, marginBottom:-5}}>
-        <Text style={{fontWeight:"bold", fontSize: 20, color:Colors.primaryBlack500}}>Recommended for you</Text>
+      <View style={styles.mainTopCont}>
+        <Text style={styles.mainTopText}>Recommended for you</Text>
       </View>
       <Restaurant inverted={true} />
       <RestaurantList />
@@ -66,17 +72,31 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.primaryPurple500,
     padding: 10,
     height: 150,
-    // borderRadius: 6,
-    // marginHorizontal: 5,
-    // margin: 10,
+  },
+  mainTabContainer: {
+    justifyContent: 'flex-end',
+    alignItems: 'flex-end',
   },
   tabButtonContainer: {
     borderWidth: 1,
-    borderColor: Colors.primaryPurple400,
+    borderColor: Colors.mainBackground,
     padding: 10,
     borderRadius: 6,
     height: 40,
-    // marginHorizontal: 5,
     margin: 10,
+  },
+  tabText: {
+    fontSize: 14,
+    color: Colors.mainBackground,
+  },
+  mainTopCont: {
+    backgroundColor: Colors.mainBackground,
+    padding: 20,
+    marginBottom: -5,
+  },
+  mainTopText: {
+    fontWeight: 'bold',
+    fontSize: 20,
+    color: Colors.primaryBlack500,
   },
 });

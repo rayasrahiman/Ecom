@@ -1,61 +1,37 @@
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import React from 'react';
 import {
   DrawerContentScrollView,
   DrawerItemList,
 } from '@react-navigation/drawer';
+import FeatherIcons from 'react-native-vector-icons/dist/Feather';
 
 import {Colors} from '../constants/colors';
 
 export default function CustomDrawer(props) {
   return (
     <View style={styles.container}>
-      <DrawerContentScrollView
-        {...props}
-        //   contentContainerStyle={{ backgroundColor: Colors.primaryWhite500 }}
-      >
-        <View
-          style={{
-            flexDirection: 'row',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            marginHorizontal: 20,
-          }}>
-          <View
-            style={{
-              justifyContent: 'center',
-              alignItems: 'center',
-              width: 80,
-              height: 80,
-              borderRadius: 80 / 2,
-              borderWidth: 2,
-              borderColor: 'black',
-              padding: 10,
-            }}>
-            <Text>MA</Text>
+      <DrawerContentScrollView {...props}>
+        <View style={styles.mainProfileContainer}>
+          <View style={styles.profileContainer}>
+            <Text style={styles.profileText}>MA</Text>
           </View>
-          <Text>ICON</Text>
+          <TouchableOpacity>
+            <FeatherIcons
+              name="edit-2"
+              size={25}
+              color={Colors.primaryPurple500}
+            />
+          </TouchableOpacity>
         </View>
-        <View>
-          <Text>Name</Text>
-          <Text>Phone number</Text>
+        <View style={styles.mainDetailContainer}>
+          <Text style={styles.nameTxt}>Muhamad Abdullah</Text>
+          <Text style={styles.phoneTxt}>+9847 44665562</Text>
         </View>
-        <View
-          style={{
-            flex: 1,
-            backgroundColor: '#F3F3F3',
-            width: 150,
-            height: '50%',
-            backgroundColor: 'white',
-            borderRadius: 50,
-            paddingTop: 10,
-          }}>
+        <View style={styles.drawerContainer}>
           <DrawerItemList {...props} />
         </View>
       </DrawerContentScrollView>
-      <View>
-        <Text>hello</Text>
-      </View>
     </View>
   );
 }
@@ -63,5 +39,45 @@ export default function CustomDrawer(props) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  mainProfileContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginHorizontal: 20,
+    marginTop: 10,
+  },
+  profileContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: 80,
+    height: 80,
+    borderRadius: 80 / 2,
+    padding: 10,
+    backgroundColor: Colors.primaryGreen500,
+  },
+  profileText: {
+    color: Colors.mainBackground,
+    fontWeight: 'bold',
+    fontSize: 20,
+  },
+  mainDetailContainer: {
+    marginHorizontal: 20,
+    marginTop: 10,
+  },
+  nameTxt: {
+    color: Colors.primaryBlack500,
+    fontWeight: 'bold',
+    fontSize: 20,
+  },
+  phoneTxt: {
+    color: Colors.primaryGreen150,
+    fontSize: 16,
+  },
+  drawerContainer: {
+    flex: 1,
+    backgroundColor: Colors.mainBackground,
+    width: 200,
+    paddingTop: 10,
   },
 });

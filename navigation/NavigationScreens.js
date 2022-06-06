@@ -1,15 +1,15 @@
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createDrawerNavigator} from '@react-navigation/drawer';
-import Icon from 'react-native-vector-icons/dist/Ionicons';
+import Ionicons from 'react-native-vector-icons/dist/Ionicons';
 
 import HomeScreen from '../screens/HomeScreen';
 import Product from '../screens/Product';
 import RestaurantDetails from '../screens/RestaurantDetails';
 import Choices from '../screens/Choices';
 import CustomDrawer from './CustomDrawer';
+import {Colors} from '../constants/colors';
 
 const Drawer = createDrawerNavigator();
 
@@ -17,18 +17,37 @@ const Stack = createNativeStackNavigator();
 
 const DrawerNavigation = () => {
   return (
-    <Drawer.Navigator drawerContent={props => <CustomDrawer {...props} />}>
+    <Drawer.Navigator
+      screenOptions={{
+        drawerStyle: {backgroundColor: Colors.mainBackground},
+        drawerLabelStyle: {fontSize: 18},
+        drawerContentStyle: {backgroundColor: Colors.mainBackground},
+        drawerInactiveTintColor: Colors.primaryGrey200,
+        drawerActiveTintColor: Colors.primaryBlack500,
+        drawerActiveBackgroundColor: Colors.primaryWhite500,
+        headerStyle: {
+          backgroundColor: Colors.primaryPurple500,
+        },
+        headerTintColor: Colors.mainBackground,
+        contentStyle: {backgroundColor: Colors.primaryPurple500},
+      }}
+      drawerContent={props => <CustomDrawer {...props} />}>
       <Drawer.Screen
         name="Home"
         component={HomeScreen}
         options={{
-          drawerIcon: ({color}) => {
-            <Icon name="home-outline" size={24} color={color} />;
-          },
+          drawerIcon: ({color, size}) => (
+            <Ionicons name="home-outline" size={size} color={color} />
+          ),
         }}
       />
       <Drawer.Screen
-        options={{headerShown: false}}
+        options={{
+          headerShown: false,
+          drawerIcon: ({color, size}) => (
+            <Ionicons name="restaurant-outline" size={size} color={color} />
+          ),
+        }}
         name="Product"
         component={Product}
       />

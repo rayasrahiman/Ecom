@@ -11,7 +11,7 @@ import React, {useLayoutEffect, useState} from 'react';
 import Ionicons from 'react-native-vector-icons/dist/Ionicons';
 
 import {Colors} from '../constants/colors';
-import {RESTAURANTS, ADDONS, ADDONSFAM, ADDONSSUB} from '../data/dummy-data';
+import {ADDONS, ADDONSFAM, ADDONSSUB} from '../data/dummy-data';
 
 export default function Choices({navigation, route}) {
   const [foodData, setFoodData] = useState({});
@@ -22,7 +22,7 @@ export default function Choices({navigation, route}) {
   }, [foodData]);
 
   return (
-    <ScrollView>
+    <ScrollView showsVerticalScrollIndicator={false}>
       <View style={styles.container}>
         <View style={styles.imageContainer}>
           <Image
@@ -30,14 +30,7 @@ export default function Choices({navigation, route}) {
             resizeMode="cover"
             style={styles.image}
           />
-          {/* <View style={styles.imagetextContainer}> */}
-          <View
-            style={{
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-              marginHorizontal: 20,
-              top: '-70%',
-            }}>
+          <View style={styles.mainTopIconWrapper}>
             <TouchableOpacity onPress={() => navigation.goBack()}>
               <Ionicons
                 name="arrow-back"
@@ -45,31 +38,16 @@ export default function Choices({navigation, route}) {
                 color={Colors.mainBackground}
               />
             </TouchableOpacity>
-            <Text
-              style={{
-                fontWeight: 'bold',
-                fontSize: 25,
-                color: Colors.mainBackground,
-              }}>
-              {foodData.name}
-            </Text>
-            <View
-              style={{flexDirection: 'row', justifyContent: 'space-evenly'}}>
-              <TouchableOpacity onPress={() => {}}>
-                <Ionicons
-                  name="search-outline"
-                  size={30}
-                  color={Colors.mainBackground}
-                />
-              </TouchableOpacity>
-              <TouchableOpacity onPress={() => {}}>
+            <Text style={styles.mainText}>{foodData.name}</Text>
+            <View style={styles.mainTopRightCont}>
+              <TouchableOpacity>
                 <Ionicons
                   name="bookmark-outline"
                   size={30}
                   color={Colors.mainBackground}
                 />
               </TouchableOpacity>
-              <TouchableOpacity onPress={() => {}}>
+              <TouchableOpacity>
                 <Ionicons
                   name="share-outline"
                   size={30}
@@ -78,42 +56,29 @@ export default function Choices({navigation, route}) {
               </TouchableOpacity>
             </View>
           </View>
-          {/* </View> */}
           <View style={styles.imageSliceContainer} />
         </View>
         <View style={[styles.cardContainer, styles.top]}>
-          <Text style={{color: Colors.primaryGreen500, fontSize: 25}}>
-            QR {foodData.amount}
-          </Text>
-          <Text style={{color: Colors.primaryBlack500, fontSize: 25}}>
-            {foodData.name}
-          </Text>
-          <Text
-            numberOfLines={2}
-            style={{color: Colors.primaryGreen150, fontSize: 16}}>
+          <Text style={styles.amountText}>QR {foodData.amount}</Text>
+          <Text style={styles.foodText}>{foodData.name}</Text>
+          <Text numberOfLines={2} style={styles.descText}>
             {foodData.description}
           </Text>
         </View>
         <View style={styles.warningContainer}>
-          <Text>
+          <Ionicons
+            style={styles.infoIcon}
+            name="information-circle-outline"
+            size={25}
+            color={Colors.primaryBrown100}
+          />
+          <Text style={styles.warningText}>
             Fermentum est massa dolor vulputate pellentesque velit facilisis
             pulvinar.
           </Text>
         </View>
-        <View
-          style={{
-            backgroundColor: Colors.mainBackground,
-            padding: 20,
-            marginBottom: -5,
-          }}>
-          <Text
-            style={{
-              fontWeight: 'bold',
-              fontSize: 20,
-              color: Colors.primaryBlack500,
-            }}>
-            Choice of (1 minimum)
-          </Text>
+        <View style={styles.mainTopTextCont}>
+          <Text style={styles.topText}>Choice of (1 minimum)</Text>
         </View>
         <FlatList
           horizontal
@@ -124,27 +89,17 @@ export default function Choices({navigation, route}) {
             return (
               <View style={styles.cardContainer}>
                 <View style={styles.extraContainer}>
-                  <Text>{item.amount}</Text>
-                  <Text style={{}}>{item.name}</Text>
+                  <Text style={styles.txt}>QR {item.amount}</Text>
+                  <Text style={[styles.txt, {textAlign: 'center'}]}>
+                    {item.name}
+                  </Text>
                 </View>
               </View>
             );
           }}
         />
-        <View
-          style={{
-            backgroundColor: Colors.mainBackground,
-            padding: 20,
-            marginBottom: -5,
-          }}>
-          <Text
-            style={{
-              fontWeight: 'bold',
-              fontSize: 20,
-              color: Colors.primaryBlack500,
-            }}>
-            Choice of family substitute
-          </Text>
+        <View style={styles.mainTopTextCont}>
+          <Text style={styles.topText}>Choice of family substitute</Text>
         </View>
         <FlatList
           horizontal
@@ -155,27 +110,17 @@ export default function Choices({navigation, route}) {
             return (
               <View style={styles.cardContainer}>
                 <View style={styles.extraContainer}>
-                  <Text>{item.amount}</Text>
-                  <Text style={{}}>{item.name}</Text>
+                  <Text style={styles.txt}>QR {item.amount}</Text>
+                  <Text style={[styles.txt, {textAlign: 'center'}]}>
+                    {item.name}
+                  </Text>
                 </View>
               </View>
             );
           }}
         />
-        <View
-          style={{
-            backgroundColor: Colors.mainBackground,
-            padding: 20,
-            marginBottom: -5,
-          }}>
-          <Text
-            style={{
-              fontWeight: 'bold',
-              fontSize: 20,
-              color: Colors.primaryBlack500,
-            }}>
-            Choice of coleslow substitute
-          </Text>
+        <View style={styles.mainTopTextCont}>
+          <Text style={styles.topText}>Choice of coleslow substitute</Text>
         </View>
         <FlatList
           horizontal
@@ -186,28 +131,19 @@ export default function Choices({navigation, route}) {
             return (
               <View style={styles.cardContainer}>
                 <View style={styles.extraContainer}>
-                  <Text>{item.amount}</Text>
-                  <Text style={{}}>{item.name}</Text>
+                  <Text style={styles.txt}>QR {item.amount}</Text>
+                  <Text style={[styles.txt, {textAlign: 'center'}]}>
+                    {item.name}
+                  </Text>
                 </View>
               </View>
             );
           }}
         />
         <View style={styles.cardContainer}>
-          <Text
-            style={{
-              fontWeight: 'bold',
-              fontSize: 20,
-              color: Colors.primaryBlack500,
-            }}>
-            Add Comments
-          </Text>
+          <Text style={styles.mainTopBtnTxt}>Add Comments</Text>
           <View>
-            <Text
-              style={{
-                fontSize: 16,
-                color: Colors.primaryGrey200,
-              }}>
+            <Text style={styles.mainTopBtnsubTxt}>
               Quam egestas et, consectetur aliquam
             </Text>
           </View>
@@ -217,32 +153,20 @@ export default function Choices({navigation, route}) {
               {flexDirection: 'row', justifyContent: 'space-between'},
             ]}>
             <Ionicons name="trash-bin-outline" size={18} color="red" />
-            <Text
-              style={{
-                fontSize: 16,
-                color: Colors.primaryPurple500,
-              }}>
-              2
-            </Text>
+            <Text style={styles.btnText}>2</Text>
             <Ionicons
               name="add-outline"
               size={18}
               color={Colors.primaryPurple500}
             />
           </View>
-          <View
+          <TouchableOpacity
             style={[
               styles.buttonContainer,
               {backgroundColor: Colors.primaryPurple500},
             ]}>
-            <Text
-              style={{
-                fontSize: 16,
-                color: Colors.mainBackground,
-              }}>
-              Add to basket (QR 25)
-            </Text>
-          </View>
+            <Text style={styles.btnName}>Add to basket (QR 25)</Text>
+          </TouchableOpacity>
         </View>
       </View>
     </ScrollView>
@@ -252,16 +176,29 @@ export default function Choices({navigation, route}) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // backgroundColor: Colors.mainBackground,
   },
   imageContainer: {
     height: 300,
     backgroundColor: Colors.mainBackground,
-    // marginTop: -30,
   },
   image: {
     height: '100%',
     width: '100%',
+  },
+  mainTopIconWrapper: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginHorizontal: 20,
+    top: '-70%',
+  },
+  mainText: {
+    fontWeight: 'bold',
+    fontSize: 25,
+    color: Colors.mainBackground,
+  },
+  mainTopRightCont: {
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
   },
   imagetextContainer: {
     top: '-75%',
@@ -279,17 +216,37 @@ const styles = StyleSheet.create({
     borderRightColor: 'transparent',
     borderBottomColor: Colors.mainBackground,
   },
+  amountText: {
+    color: Colors.primaryGreen500,
+    fontSize: 25,
+  },
+  foodText: {
+    color: Colors.primaryBlack500,
+    fontSize: 25,
+  },
+  descText: {
+    color: Colors.primaryGreen150,
+    fontSize: 16,
+  },
   top: {
     // marginLeft: 20,
     // marginTop: 20,
   },
   warningContainer: {
+    flexDirection: 'row',
     marginHorizontal: 10,
     padding: 10,
     borderWidth: 1,
     borderRadius: 6,
     borderColor: Colors.primaryBrown100,
     backgroundColor: Colors.primaryBrown50,
+  },
+  infoIcon: {
+    paddingRight: 5,
+  },
+  warningText: {
+    fontSize: 14,
+    color: Colors.primaryBrown100,
   },
   cardContainer: {
     backgroundColor: Colors.mainBackground,
@@ -316,5 +273,36 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     borderColor: Colors.primaryPurple500,
     padding: 10,
+  },
+  mainTopTextCont: {
+    backgroundColor: Colors.mainBackground,
+    padding: 20,
+    marginBottom: -5,
+  },
+  topText: {
+    fontWeight: 'bold',
+    fontSize: 20,
+    color: Colors.primaryBlack500,
+  },
+  txt: {
+    fontSize: 14,
+    color: Colors.mainBackground,
+  },
+  mainTopBtnTxt: {
+    fontWeight: 'bold',
+    fontSize: 20,
+    color: Colors.primaryBlack500,
+  },
+  mainTopBtnsubTxt: {
+    fontSize: 16,
+    color: Colors.primaryGrey200,
+  },
+  btnText: {
+    fontSize: 16,
+    color: Colors.primaryPurple500,
+  },
+  btnName: {
+    fontSize: 16,
+    color: Colors.mainBackground,
   },
 });
