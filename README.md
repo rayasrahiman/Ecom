@@ -12,6 +12,10 @@ git clone [Repo](https://github.com/rayasrahiman/Ecom.git)
 ```bash
 npm i --save
 ```
+
+## Run
+
+
 ```bash
 npx react-native run-android
 ```
